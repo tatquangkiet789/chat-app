@@ -1,5 +1,5 @@
 # chat-app
 
-Sau khi clone project v? thì: 
-M? terminal lên và ch?y l?nh npm install
-Ð? nó cài node_modules t? package.json
+Sau khi clone project ve thi:
+Mo terminal len và chay lenh npm install
+De no cai node_modules tu package.json
