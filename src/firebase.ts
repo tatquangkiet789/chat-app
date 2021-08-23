@@ -1,12 +1,12 @@
-import firebase from 'firebase'
+import firebase from 'firebase';
 
 let firebaseConfig = {
-    apiKey: "AIzaSyADEKUFv4H9TjJlfcgJPwo8PRyXM22W3Nc",
-    authDomain: "chat-app-e8980.firebaseapp.com",
-    projectId: "chat-app-e8980",
-    storageBucket: "chat-app-e8980.appspot.com",
-    messagingSenderId: "248702459070",
-    appId: "1:248702459070:web:dbcc8a48089f53551b12ef"
+    apiKey: process.env.REACT_APP_API_KEY,
+    authDomain: process.env.REACT_APP_AUTH_DOMAIN,
+    projectId: process.env.REACT_APP_PROJECT_ID,
+    storageBucket: process.env.REACT_APP_STORAGE_BUCKET,
+    messagingSenderId: process.env.REACT_APP_MESSAGING_SENDER_ID,
+    appId: process.env.REACT_APP_APP_ID
 };
 
 firebase.initializeApp(firebaseConfig);

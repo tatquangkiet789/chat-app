@@ -2,15 +2,21 @@ import React from 'react';
 import './App.css';
 import ChatRoom from './components/ChatRoom/ChatRoom';
 import SignIn from './components/SignIn/SignIn';
-import { auth } from './firebase';
-import { useAuthState } from 'react-firebase-hooks/auth';
+import UserProvider from './components/UserContext/UserProvider';
+import { BrowserRouter, Route, Switch } from 'react-router-dom';
 
 function App() {
-  const [user] = useAuthState(auth);
 
   return (
     <div className="App">
-      {user ? <ChatRoom /> : <SignIn />}
+      <BrowserRouter>
+        <UserProvider>
+            <Switch>
+              <Route component={SignIn} path="/login" />
+              <Route component={ChatRoom} path="/" />
+            </Switch>
+        </UserProvider>
+      </BrowserRouter>
     </div>
   );
 }
