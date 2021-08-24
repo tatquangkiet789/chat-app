@@ -17,19 +17,22 @@ const UserProvider: React.FC = ({children}) => {
                 setUser({uid, photoURL, displayName, email});
                 setLoading(false);
                 history.push('/');
-                console.log({user});
-            } else {
-                history.push('/login');
+                return;
             }
+            setLoading(false);
+            history.push('/login');
         });
 
         //Clean up
-        return unsub;
+        return () => {
+            unsub();
+        }
     }, [history]);
 
     return (
         <UserContext.Provider value={{user}}>
             {loading ? <Spin /> : children}
+            {/* {children} */}
         </UserContext.Provider>
     );
 }

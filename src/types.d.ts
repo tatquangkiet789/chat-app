@@ -4,3 +4,12 @@ type userInfo = {
     displayName: string | null,
     email: string | null
 }
+
+type message = {
+    uid: string,
+    text: string,
+    createdAt: {
+        seconds: number,
+        nanoseconds: number
+    }
+}
