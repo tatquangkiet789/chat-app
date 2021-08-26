@@ -7,8 +7,8 @@ interface Props {
 const Message: React.FC<Props> = ({message}) => {
     return (
         <div>
+            <h4>{message.uid}</h4>
             <h3>{message.text}</h3>
-            <p>{message.createdAt}</p>
         </div>
     );
 }

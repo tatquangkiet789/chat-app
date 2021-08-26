@@ -7,9 +7,5 @@ type userInfo = {
 
 type message = {
     uid: string,
-    text: string,
-    createdAt: {
-        seconds: number,
-        nanoseconds: number
-    }
+    text: string
 }
