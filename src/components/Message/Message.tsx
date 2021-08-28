@@ -1,13 +1,12 @@
 import React from "react";
 
 interface Props {
-    message: message
+    message: Message
 }
 
 const Message: React.FC<Props> = ({message}) => {
     return (
         <div>
-            <h4>{message.uid}</h4>
             <h3>{message.text}</h3>
         </div>
     );
