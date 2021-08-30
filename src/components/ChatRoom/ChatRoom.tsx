@@ -3,6 +3,8 @@ import { db } from '../../firebase';
 import MessageList from '../MessageList/MessageList';
 import SignOut from '../SignOut/SignOut'
 import firebase from 'firebase';
+import ChatList from '../ChatList/ChatList';
+import style from "./ChatRoom.module.css";
 
 const ChatRoom: React.FC = () => {
     const [messages, setMessages] = useState<Message[]>([]);
@@ -43,13 +45,16 @@ const ChatRoom: React.FC = () => {
     }
 
     return (
-        <div>
-            <MessageList messages={messages} />
-            <form onSubmit={handleAddMessage}>
-                <input type="text" ref={messageNameRef} placeholder="Type your message here....." />
-                <button type="submit">Send</button>
-            </form>
-            <SignOut />
+        <div className={style.container}>
+            <ChatList />
+            <div className={style.chatWindow}>
+                <MessageList messages={messages} />
+                <form className={style.sendBox} onSubmit={handleAddMessage}>
+                    <input className={style.sendBar} type="text" ref={messageNameRef} placeholder="Type your message here....." />
+                    <button className={style.sendButton} type="submit">Send</button>
+                </form>
+            </div>
+            {/* <SignOut /> */}
         </div>
     )
 }

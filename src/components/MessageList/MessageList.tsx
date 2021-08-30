@@ -1,5 +1,6 @@
 import React from "react";
 import Message from "../Message/Message";
+import style from "./MessageList.module.css";
 
 interface Props {
     messages: Message[]
@@ -7,11 +8,13 @@ interface Props {
 
 const MessageList: React.FC<Props> = ({messages}) => {
     return (
-        <React.Fragment>
-            {messages.map(msg => {
-                return <Message key={msg.uid} message={msg}/>
-            })}
-        </React.Fragment>
+        <div className={style.container}>
+            <div className={style.messages}>
+                {messages.map(msg => {
+                    return <Message key={msg.uid} message={msg}/>
+                })}
+            </div>
+        </div>
     );
 }
 
