@@ -1,11 +1,12 @@
 type User = {
     uid: string,
-    photoURL: string | null,
-    displayName: string | null,
-    email: string | null
+    photoURL: string,
+    displayName: string,
+    email: string
 }
 
 type Message = {
     uid: string,
-    text: string
+    text: string,
+    senderID: string
 }
