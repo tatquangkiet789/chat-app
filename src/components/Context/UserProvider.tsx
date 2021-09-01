@@ -11,21 +11,12 @@ const UserProvider: React.FC = ({children}) => {
     const history = useHistory();
 
     useEffect(() => {
-        const unsub = auth.onAuthStateChanged(async (userFirebase) => {
+        const unsub = auth.onAuthStateChanged((userFirebase) => {
             try {
                 if(userFirebase) {
-                    // const {uid, photoURL, displayName, email} = await userFirebase;
-                    // if(user && uid) 
-                    //     user.uid = uid;
-                    // console.log(user)
-                    if(user && userFirebase.photoURL && userFirebase.displayName && userFirebase.email) {
-                        user.uid = userFirebase.uid;
-                        user.photoURL = userFirebase.photoURL;
-                        user.displayName = userFirebase.displayName;
-                        user.email = userFirebase.email;
-                    }
-                    console.log(user)
-                    setUser(user);
+                    const {uid, photoURL, displayName, email} = userFirebase;
+                    if(uid && photoURL && displayName && email)
+                        setUser({uid, photoURL, displayName, email});
                     setLoading(false);
                     history.push('/');
                     return;
@@ -41,7 +32,7 @@ const UserProvider: React.FC = ({children}) => {
         return () => {
             unsub();
         }
-    }, [history, user]);
+    }, [history]);
 
     return (
         <UserContext.Provider value={user!}>

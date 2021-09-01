@@ -10,7 +10,12 @@
 .chatWindow {
     height: 90vh;
     width: 77%;
-    background-color: red;
+}
+
+.chatList {
+    background-color: #7f57c6;
+    height: 90vh;
+    width: 17%;
 }
 
 .sendBox {

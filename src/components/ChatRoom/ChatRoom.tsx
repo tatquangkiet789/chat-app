@@ -1,11 +1,11 @@
 import React, { useState, useEffect, useRef, MutableRefObject, FormEvent, useContext } from 'react'
 import { db } from '../../firebase';
-import MessageList from '../MessageList/MessageList';
 import firebase from 'firebase';
-import ChatList from '../ChatList/ChatList';
 import style from "./ChatRoom.module.css";
-import { UserContext } from '../UserContext/UserProvider';
+import { UserContext } from '../Context/UserProvider';
 import SignOut from '../SignOut/SignOut';
+import MessageList from '../MessageList/MessageList';
+import ChatList from '../ChatList/ChatList';
 
 const ChatRoom: React.FC = () => {
     const [messages, setMessages] = useState<Message[]>([]);
@@ -38,6 +38,7 @@ const ChatRoom: React.FC = () => {
                 e.preventDefault();
                 await db.collection('messages').add({
                     text: name,
+                    senderID: user.uid,
                     created: firebase.firestore.FieldValue.serverTimestamp()
                 });
                 messageNameRef.current.value = "";
@@ -49,7 +50,9 @@ const ChatRoom: React.FC = () => {
 
     return (
         <div className={style.container}>
-            <ChatList />
+            <div className={style.chatList}>
+                <ChatList />
+            </div>
             <div className={style.chatWindow}>
                 <MessageList messages={messages} />
                 <form className={style.sendBox} onSubmit={handleAddMessage}>
@@ -58,7 +61,6 @@ const ChatRoom: React.FC = () => {
                 </form>
             </div>
             <SignOut />
-            {console.log(user)}
         </div>
     )
 }

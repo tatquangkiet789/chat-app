@@ -2,7 +2,7 @@ import React from 'react';
 import './App.css';
 import ChatRoom from './components/ChatRoom/ChatRoom';
 import SignIn from './components/SignIn/SignIn';
-import UserProvider from './components/UserContext/UserProvider';
+import UserProvider from './components/Context/UserProvider';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 
 function App() {
