@@ -1,5 +1,5 @@
 import React from "react";
-//import style from "./UserInfo.module.css"
+import style from "./UserInfo.module.css"
 
 interface Props {
     userInfo: User
@@ -7,11 +7,12 @@ interface Props {
 
 const UserInfo: React.FC<Props> = ({userInfo}) => {
     return (
-        <div>
-            <h5>{userInfo.uid}</h5>
-            <h5>{userInfo.displayName}</h5>
-            <h5>{userInfo.email}</h5>
-            <img src={userInfo.photoURL} height="60" width="60" alt="User" />
+        <div className={style.container}>
+            <img className={style.userImg} src={userInfo.photoURL} height="60" width="60" alt="User" />
+            <div className={style.userInfo}>
+                <h5 className={style.userName}>{userInfo.displayName}</h5>
+                <h5 className={style.userEmail}>{userInfo.email}</h5>
+            </div>
         </div>
     );
 }

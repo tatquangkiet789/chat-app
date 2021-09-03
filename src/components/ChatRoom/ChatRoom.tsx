@@ -60,7 +60,7 @@ const ChatRoom: React.FC = () => {
                     <button className={style.sendButton} type="submit">Send</button>
                 </form>
             </div>
-            <SignOut />
+            {/* <SignOut /> */}
         </div>
     )
 }

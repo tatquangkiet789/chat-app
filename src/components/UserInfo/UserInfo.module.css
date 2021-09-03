@@ -1,0 +1,52 @@
+.container {
+    display: flex;
+    align-items: center;
+    height: 10vh;
+    margin: 0px 8px 5px 8px;
+    border-radius: 5px;
+    background-color: #7f57c6;
+}
+
+.userImg {
+    border-radius: 50%;
+    margin-left: 5px;
+    margin-right: 8px;
+}
+
+.userInfo {
+    color: #e6e6e6;
+    height: 10vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.userName, .userEmail {
+    padding: 2px;
+}
+
+.container:hover {
+    cursor: pointer;
+    filter: brightness(85%);
+}
+
+@media screen and (max-width: 1024px) {
+    .container {
+        background-color: red;
+        margin: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .userImg {
+        height: 60px;
+        width: 60px;
+        margin-left: 0px;
+        margin-right: 0px;
+    }
+
+    .userInfo {
+        display: none;
+    }
+}

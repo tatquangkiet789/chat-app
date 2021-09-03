@@ -13,9 +13,8 @@
 }
 
 .chatList {
-    background-color: #7f57c6;
-    height: 90vh;
     width: 17%;
+    height: 90vh;
 }
 
 .sendBox {

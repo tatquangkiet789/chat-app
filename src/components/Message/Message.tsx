@@ -7,7 +7,7 @@ interface Props {
 const Message: React.FC<Props> = ({message}) => {
     return (
         <div>
-            <h3>{message.text}</h3>
+            <h3>{message.text} - {message.senderID}</h3>
         </div>
     );
 }
