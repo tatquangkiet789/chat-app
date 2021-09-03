@@ -8,5 +8,6 @@ type User = {
 type Message = {
     uid: string,
     text: string,
-    senderID: string
+    senderID: string,
+    receiverID: string
 }

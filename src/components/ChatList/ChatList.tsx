@@ -5,7 +5,11 @@ import { UserContext } from "../Context/UserProvider";
 import UserInfoList from "../UserInfoList/UserInfoList";
 import style from "./ChatList.module.css"
 
-const ChatList: React.FC = () => {
+interface Props {
+    setReceiverID: (receiverID: string) => void;
+}
+
+const ChatList: React.FC<Props> = ({setReceiverID}) => {
     const [usersInfo, setUsersInfo] = useState<User[]>([]);
     const currentUser = useContext<User>(UserContext);
 
@@ -28,14 +32,9 @@ const ChatList: React.FC = () => {
         }
     }, [])
 
-    const handleGetUserUid = (receiverID: string) => {
-        console.log(receiverID);
-    }
-
     return (
         <div className={style.container}>
-            <UserInfoList usersInfo={usersInfo.filter(user => user.uid !== currentUser.uid)} />
-            {console.log(usersInfo)}
+            <UserInfoList setReceiverID={setReceiverID} usersInfo={usersInfo.filter(user => user.uid !== currentUser.uid)} />
         </div>
     );
 }

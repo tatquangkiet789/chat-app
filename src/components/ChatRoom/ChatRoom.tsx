@@ -9,17 +9,19 @@ import ChatList from '../ChatList/ChatList';
 
 const ChatRoom: React.FC = () => {
     const [messages, setMessages] = useState<Message[]>([]);
+    const [receiverID, setReceiverID] = useState<string>();
     const messageNameRef = useRef() as MutableRefObject<HTMLInputElement>;
     const user = useContext<User>(UserContext);
 
     useEffect(() => {
-        if(db) {
+        if(db && receiverID) {
             const unsub = db.collection('messages').orderBy('created').limit(25)
             .onSnapshot(snapshot => {
                 setMessages(snapshot.docs.map(doc => ({
                     uid: doc.id,
                     text: doc.data().text,
-                    senderID: user.uid
+                    senderID: user.uid,
+                    receiverID: doc.data().receiverID
                 })))
             })
             //Clean up
@@ -36,11 +38,14 @@ const ChatRoom: React.FC = () => {
                 return;
             else {
                 e.preventDefault();
-                await db.collection('messages').add({
-                    text: name,
-                    senderID: user.uid,
-                    created: firebase.firestore.FieldValue.serverTimestamp()
-                });
+                if(receiverID) {
+                    await db.collection('messages').add({
+                        text: name,
+                        senderID: user.uid,
+                        receiverID: receiverID,
+                        created: firebase.firestore.FieldValue.serverTimestamp()
+                    });
+                }
                 messageNameRef.current.value = "";
             }
         }catch(err) {
@@ -51,7 +56,7 @@ const ChatRoom: React.FC = () => {
     return (
         <div className={style.container}>
             <div className={style.chatList}>
-                <ChatList />
+                <ChatList setReceiverID={setReceiverID} />
             </div>
             <div className={style.chatWindow}>
                 <MessageList messages={messages} />
@@ -60,7 +65,8 @@ const ChatRoom: React.FC = () => {
                     <button className={style.sendButton} type="submit">Send</button>
                 </form>
             </div>
-            {/* <SignOut /> */}
+            <SignOut />
+            {console.log(receiverID)}
         </div>
     )
 }
