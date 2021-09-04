@@ -1,26 +1,26 @@
 import React, { useState, useEffect, useRef, MutableRefObject, FormEvent, useContext } from 'react'
 import { db } from '../../firebase';
 import firebase from 'firebase';
-import style from "./ChatRoom.module.css";
+import style from "./ChatWindow.module.css";
 import { UserContext } from '../Context/UserProvider';
 import SignOut from '../SignOut/SignOut';
 import MessageList from '../MessageList/MessageList';
 import ChatList from '../ChatList/ChatList';
 
-const ChatRoom: React.FC = () => {
+const ChatWindow: React.FC = () => {
     const [messages, setMessages] = useState<Message[]>([]);
     const [receiverID, setReceiverID] = useState<string>();
     const messageNameRef = useRef() as MutableRefObject<HTMLInputElement>;
     const user = useContext<User>(UserContext);
 
     useEffect(() => {
-        if(db && receiverID) {
+        if(db || receiverID) {
             const unsub = db.collection('messages').orderBy('created').limit(25)
             .onSnapshot(snapshot => {
                 setMessages(snapshot.docs.map(doc => ({
                     uid: doc.id,
                     text: doc.data().text,
-                    senderID: user.uid,
+                    senderID: doc.data().senderID,
                     receiverID: doc.data().receiverID
                 })))
             })
@@ -71,4 +71,4 @@ const ChatRoom: React.FC = () => {
     )
 }
 
-export default ChatRoom;
+export default ChatWindow;
