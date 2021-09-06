@@ -1,0 +1,5 @@
+.chat-list-container {
+    background-color: #7f57c6;
+    height: 100%;
+    overflow-y: scroll;
+}

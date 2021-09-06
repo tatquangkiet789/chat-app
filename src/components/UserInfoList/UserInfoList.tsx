@@ -1,6 +1,6 @@
 import React from "react";
 import UserInfo from "../UserInfo/UserInfo";
-import style from "./UserInfoList.module.css";
+import "./UserInfoList.css";
 
 interface Props {
     usersInfo: User[];
@@ -10,7 +10,7 @@ interface Props {
 const UserInfoList: React.FC<Props> = ({usersInfo, setReceiverID}) => {
 
     return (
-        <div className={style.container}>
+        <div>
             {usersInfo.map(userInfo => {
                 return <UserInfo setReceiverID={setReceiverID} key={userInfo.uid} userInfo={userInfo} />
             })}

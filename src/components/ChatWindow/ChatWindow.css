@@ -1,23 +1,26 @@
-.container {
+.chat-room {
     height: 100vh;
     width: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
     background-color: #eff1f5;
 }
 
-.chatWindow {
-    min-height: 90vh;
-    width: 77%;
+.chat-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
-.chatList {
+.chat-window {
+    min-height: 82vh;
+    width: 73%;
+}
+
+.chat-list {
     width: 17%;
-    height: 90vh;
+    height: 82vh;
 }
 
-.sendBox {
+.send-box {
     height: 10vh;
     background-color: yellow;
     display: flex;
@@ -25,7 +28,7 @@
     justify-content: center;
 }
 
-.sendBar {
+.send-bar {
     width: 70%;
     border-radius: 2vh;
     height: 5vh;
@@ -34,11 +37,11 @@
     font-size: 2vh;
 }
 
-.sendBar:focus {
+.send-bar:focus {
     outline: 0;
 }
 
-.sendButton {
+.send-button {
     height: 5vh;
     width: 10vh;
     color: blue;

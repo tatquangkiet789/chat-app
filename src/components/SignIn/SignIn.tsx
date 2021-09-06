@@ -1,7 +1,7 @@
 import React from 'react'
 import firebase from 'firebase' 
 import { auth, db } from '../../firebase'
-import style from './SignIn.module.css'
+import './SignIn.css'
 
 const SignIn: React.FC = () => {
     const signInWithGoogle = async () => {
@@ -22,12 +22,12 @@ const SignIn: React.FC = () => {
     }
 
     return (
-        <div className={style.container}>
-            <div className={style.holder}>
-                <div className={style.image}></div>
-                <div className={style.buttonContainer}>
-                    <h2 className={style.text}>Welcome to DoanChat</h2>
-                    <button className={style.signInButton} onClick={signInWithGoogle}>Sign in with Google</button>
+        <div className="sign-in-container">
+            <div className="sign-in-content">
+                <div className="image"></div>
+                <div className="sign-in-box">
+                    <h2 className="sign-in-text">Welcome to DoanChat</h2>
+                    <button className="sign-in-button" onClick={signInWithGoogle}>Sign in with Google</button>
                 </div>
             </div>
         </div>

@@ -1,11 +1,11 @@
 import React, { useState, useEffect, useRef, MutableRefObject, FormEvent, useContext } from 'react'
 import { db } from '../../firebase';
 import firebase from 'firebase';
-import style from "./ChatWindow.module.css";
+import "./ChatWindow.css";
 import { UserContext } from '../Context/UserProvider';
-import SignOut from '../SignOut/SignOut';
 import MessageList from '../MessageList/MessageList';
 import ChatList from '../ChatList/ChatList';
+import Navbar from '../Navbar/Navbar';
 
 const ChatWindow: React.FC = () => {
     const [messages, setMessages] = useState<Message[]>([]);
@@ -54,19 +54,21 @@ const ChatWindow: React.FC = () => {
     }
 
     return (
-        <div className={style.container}>
-            <div className={style.chatList}>
-                <ChatList setReceiverID={setReceiverID} />
+        <div className="chat-room">
+            <Navbar />
+            <div className="chat-container">
+                <div className="chat-list">
+                    <ChatList setReceiverID={setReceiverID} />
+                </div>
+                <div className="chat-window">
+                    <MessageList messages={messages} />
+                    <form className="send-box" onSubmit={handleAddMessage}>
+                        <input className="send-bar" type="text" ref={messageNameRef} placeholder="Type your message here....." />
+                        <button className="send-button" type="submit">Send</button>
+                    </form>
+                </div>
+                {console.log(receiverID)}
             </div>
-            <div className={style.chatWindow}>
-                <MessageList messages={messages} />
-                <form className={style.sendBox} onSubmit={handleAddMessage}>
-                    <input className={style.sendBar} type="text" ref={messageNameRef} placeholder="Type your message here....." />
-                    <button className={style.sendButton} type="submit">Send</button>
-                </form>
-            </div>
-            <SignOut />
-            {console.log(receiverID)}
         </div>
     )
 }

@@ -3,7 +3,7 @@ import { useContext } from "react";
 import { db } from "../../firebase";
 import { UserContext } from "../Context/UserProvider";
 import UserInfoList from "../UserInfoList/UserInfoList";
-import style from "./ChatList.module.css"
+import "./ChatList.css"
 
 interface Props {
     setReceiverID: (receiverID: string) => void;
@@ -33,7 +33,7 @@ const ChatList: React.FC<Props> = ({setReceiverID}) => {
     }, [])
 
     return (
-        <div className={style.container}>
+        <div className="chat-list-container">
             <UserInfoList setReceiverID={setReceiverID} usersInfo={usersInfo.filter(user => user.uid !== currentUser.uid)} />
         </div>
     );

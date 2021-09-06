@@ -1,5 +1,5 @@
 .message-container {
-    background-color: red;
+    background-color: gainsboro;
     padding: 10px;
     width: fit-content;
     max-width: 60%;
@@ -9,7 +9,8 @@
 }
 
 .message-container-send {
-    background-color: red;
+    background-color: #7f57c6;
+    color: #e6e6e6;
     padding: 10px;
     width: fit-content;
     max-width: 60%;
