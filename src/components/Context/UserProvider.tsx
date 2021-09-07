@@ -27,8 +27,7 @@ const UserProvider: React.FC = ({children}) => {
                 console.log(err);
             }
         });
-
-        //Clean up
+        //Dọn dẹp sự kiện onAuthStateChanged
         return () => {
             unsub();
         }

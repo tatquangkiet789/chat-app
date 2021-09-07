@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useContext } from "react";
 import { db } from "../../firebase";
 import { UserContext } from "../Context/UserProvider";
-import UserInfoList from "../UserInfoList/UserInfoList";
+import UserInfo from "../UserInfo/UserInfo";
 import "./ChatList.css"
 
 interface Props {
@@ -24,8 +24,7 @@ const ChatList: React.FC<Props> = ({setReceiverID}) => {
                     email: doc.data().email
                 })));
             })
-
-            //Clean up
+            //Dọn dẹp sự kiện onSnapShot
             return () => {
                 unsub();
             }
@@ -34,7 +33,9 @@ const ChatList: React.FC<Props> = ({setReceiverID}) => {
 
     return (
         <div className="chat-list-container">
-            <UserInfoList setReceiverID={setReceiverID} usersInfo={usersInfo.filter(user => user.uid !== currentUser.uid)} />
+            {usersInfo.filter(user => user.uid !== currentUser.uid).map(userInfo => {
+                return <UserInfo setReceiverID={setReceiverID} key={userInfo.uid} userInfo={userInfo} />
+            })}
         </div>
     );
 }

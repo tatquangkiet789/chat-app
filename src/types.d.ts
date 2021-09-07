@@ -9,5 +9,5 @@ type Message = {
     uid: string,
     text: string,
     senderID: string,
-    receiverID: string
+    usersInvolve: string[]
 }
