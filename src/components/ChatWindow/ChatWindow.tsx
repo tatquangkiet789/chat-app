@@ -13,27 +13,42 @@ const ChatWindow: React.FC = () => {
     const messageNameRef = useRef() as MutableRefObject<HTMLInputElement>;
     const dmmyMesseage = useRef() as MutableRefObject<HTMLDivElement>
     const user = useContext<User>(UserContext);
-    const test: string[] = [user.uid, receiverID];
+
+    // useEffect(() => {
+    //     if(db) {
+    //         db.collection('messages').where('usersInvolve', 'array-contains', [user.uid, receiverID])
+    //             .get()
+    //             .then(snapshot => {
+    //                 setMessages(snapshot.docs.map(doc => ({
+    //                     uid: doc.id,
+    //                     text: doc.data().text,
+    //                     senderID: doc.data().senderID,
+    //                     usersInvolve: doc.data().usersInvolve
+    //                 })))
+    //             })
+    //     }
+    // }, [receiverID, db])
 
     //Lấy dữ liệu từ Firestore ở Firebase
     useEffect(() => {
-        if(db) {
+        if(db && receiverID !== "") {
             const unsub = db.collection('messages')
-            .where('usersInvolve', 'array-contains', test)
+            .where('usersInvolve', 'array-contains-any', [user.uid, receiverID])
+            .orderBy('created')
             .onSnapshot(snapshot => {
                 setMessages(snapshot.docs.map(doc => ({
                     uid: doc.id,
                     text: doc.data().text,
                     senderID: doc.data().senderID,
                     usersInvolve: doc.data().usersInvolve
-                })))
+                })))   
             })
             //Dọn dẹp sự kiện onSnapShot
             return () => {
                 unsub();
             }
         }
-    }, [])
+    }, [receiverID])
 
     //Thêm message vào Firestore
     const handleAddMessage = async (e: FormEvent<HTMLFormElement>) => {
@@ -44,14 +59,15 @@ const ChatWindow: React.FC = () => {
             else {
                 e.preventDefault();
                 if(receiverID) {
+                    const test: string[] = [user.uid, receiverID];
                     await db.collection('messages').add({
                         text: name,
                         senderID: user.uid,
                         usersInvolve: test,
                         created: firebase.firestore.FieldValue.serverTimestamp()
                     });
+                    messageNameRef.current.value = "";
                 }
-                messageNameRef.current.value = "";
                 //Dùng để tự động scroll down tới mesage mới nhất
                 dmmyMesseage.current.scrollIntoView({behavior: 'smooth'});
             }
@@ -84,7 +100,6 @@ const ChatWindow: React.FC = () => {
                 </div>
             </div>
             {console.log(receiverID)}
-            {console.log(test)}
         </div>
     )
 }
