@@ -33,15 +33,17 @@ const ChatWindow: React.FC = () => {
     useEffect(() => {
         if(db && receiverID !== "") {
             const unsub = db.collection('messages')
-            .where('usersInvolve', 'array-contains-any', [user.uid, receiverID])
-            .orderBy('created')
+            .where('senderID', 'in', [user.uid, receiverID])
+            .orderBy('created').limit(25)
             .onSnapshot(snapshot => {
-                setMessages(snapshot.docs.map(doc => ({
-                    uid: doc.id,
-                    text: doc.data().text,
-                    senderID: doc.data().senderID,
-                    usersInvolve: doc.data().usersInvolve
-                })))   
+                const temp: Message[] = [];
+                snapshot.docs.map(doc => {
+                    if((doc.data().senderID === user.uid && doc.data().receiverID === receiverID) || 
+                        (doc.data().senderID === receiverID && doc.data().receiverID === user.uid)) {
+                        temp.push({uid: doc.id, text: doc.data().text, senderID: doc.data().senderID, receiverID: doc.data().receiverID}); 
+                    }
+                }) 
+                setMessages(temp);
             })
             //Dọn dẹp sự kiện onSnapShot
             return () => {
@@ -59,11 +61,10 @@ const ChatWindow: React.FC = () => {
             else {
                 e.preventDefault();
                 if(receiverID) {
-                    const test: string[] = [user.uid, receiverID];
                     await db.collection('messages').add({
                         text: name,
                         senderID: user.uid,
-                        usersInvolve: test,
+                        receiverID: receiverID,
                         created: firebase.firestore.FieldValue.serverTimestamp()
                     });
                     messageNameRef.current.value = "";
