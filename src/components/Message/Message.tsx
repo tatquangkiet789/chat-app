@@ -11,7 +11,7 @@ const Message: React.FC<Props> = ({message}) => {
 
     return (
         <div className={(currentUser.uid === message.senderID) ? "message-container-send" : "message-container"}>
-            <h3>{message.text}</h3>
+            <p>{message.text}</p>
         </div>
     );
 }

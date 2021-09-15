@@ -12,22 +12,7 @@ const ChatWindow: React.FC = () => {
     const [receiverID, setReceiverID] = useState<string>("");
     const messageNameRef = useRef() as MutableRefObject<HTMLInputElement>;
     const dmmyMesseage = useRef() as MutableRefObject<HTMLDivElement>
-    const user = useContext<User>(UserContext);
-
-    // useEffect(() => {
-    //     if(db) {
-    //         db.collection('messages').where('usersInvolve', 'array-contains', [user.uid, receiverID])
-    //             .get()
-    //             .then(snapshot => {
-    //                 setMessages(snapshot.docs.map(doc => ({
-    //                     uid: doc.id,
-    //                     text: doc.data().text,
-    //                     senderID: doc.data().senderID,
-    //                     usersInvolve: doc.data().usersInvolve
-    //                 })))
-    //             })
-    //     }
-    // }, [receiverID, db])
+    const user = useContext<User>(UserContext); 
 
     //Lấy dữ liệu từ Firestore ở Firebase
     useEffect(() => {
@@ -37,7 +22,8 @@ const ChatWindow: React.FC = () => {
             .orderBy('created').limit(25)
             .onSnapshot(snapshot => {
                 const temp: Message[] = [];
-                snapshot.docs.map(doc => {
+                //Nên tối ưu lại khúc trả Messages
+                snapshot.docs.forEach(doc => {
                     if((doc.data().senderID === user.uid && doc.data().receiverID === receiverID) || 
                         (doc.data().senderID === receiverID && doc.data().receiverID === user.uid)) {
                         temp.push({uid: doc.id, text: doc.data().text, senderID: doc.data().senderID, receiverID: doc.data().receiverID}); 
@@ -50,7 +36,7 @@ const ChatWindow: React.FC = () => {
                 unsub();
             }
         }
-    }, [receiverID])
+    }, [receiverID, user.uid])
 
     //Thêm message vào Firestore
     const handleAddMessage = async (e: FormEvent<HTMLFormElement>) => {

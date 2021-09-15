@@ -7,6 +7,7 @@
     display: flex;
     align-items: center;
     justify-content: flex-end;
+    outline: 1px solid white;
 }
 
 .sign-out-button, .toggle-dark-mode {
