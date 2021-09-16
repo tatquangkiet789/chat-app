@@ -6,6 +6,7 @@ import { UserContext } from '../Context/UserProvider';
 import ChatList from '../ChatList/ChatList';
 import Navbar from '../Navbar/Navbar';
 import Message from '../Message/Message';
+import ReceiverInfo from '../ReceiverInfo/ReceiverInfo';
 
 const ChatWindow: React.FC = () => {
     const [messages, setMessages] = useState<Message[]>([]);
@@ -20,10 +21,10 @@ const ChatWindow: React.FC = () => {
             const unsub = db.collection('messages')
             .where('senderID', 'in', [user.uid, receiverID])
             .orderBy('created').limit(25)
-            .onSnapshot(snapshot => {
+            .onSnapshot(snapShot => {
                 const temp: Message[] = [];
                 //Nên tối ưu lại khúc trả Messages
-                snapshot.docs.forEach(doc => {
+                snapShot.docs.forEach(doc => {
                     if((doc.data().senderID === user.uid && doc.data().receiverID === receiverID) || 
                         (doc.data().senderID === receiverID && doc.data().receiverID === user.uid)) {
                         temp.push({uid: doc.id, text: doc.data().text, senderID: doc.data().senderID, receiverID: doc.data().receiverID}); 
@@ -36,7 +37,7 @@ const ChatWindow: React.FC = () => {
                 unsub();
             }
         }
-    }, [receiverID, user.uid])
+    }, [receiverID])
 
     //Thêm message vào Firestore
     const handleAddMessage = async (e: FormEvent<HTMLFormElement>) => {
@@ -73,6 +74,9 @@ const ChatWindow: React.FC = () => {
                     <ChatList setReceiverID={setReceiverID} />
                 </div>
                 <div className="chat-window">
+                    <div>
+                        <ReceiverInfo receiverID={receiverID} />
+                    </div>
                     <div className="messages">
                         {messages.map(msg => {
                             return <Message key={msg.uid} message={msg}/>

@@ -13,7 +13,7 @@ const UserInfo: React.FC<Props> = ({userInfo, setReceiverID}) => {
 
     return (
         <div onClick={handleGetReceiverID} className="user-container">
-            <img className="user-image" src={userInfo.photoURL} height="60" width="60" alt="User" />
+            <img className="user-image" src={userInfo.photoURL} alt="User" />
             <div className="user-info">
                 <h5 className="user-name">{userInfo.displayName}</h5>
                 <h5 className="user-email">{userInfo.email}</h5>

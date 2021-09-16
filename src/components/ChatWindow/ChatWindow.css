@@ -17,19 +17,19 @@
 
 .chat-list {
     width: 17%;
-    height: 82vh;
+    height: 90vh;
 }
 
 .send-box {
     height: 10vh;
-    background-color: yellow;
+    background-color: gainsboro;
     display: flex;
     align-items: center;
     justify-content: center;
 }
 
 .send-bar {
-    width: 70%;
+    width: 80%;
     border-radius: 2vh;
     height: 5vh;
     border: 1px solid black;

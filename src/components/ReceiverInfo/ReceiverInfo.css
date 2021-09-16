@@ -1,0 +1,14 @@
+.receiver-container {
+    height: 8vh;
+    display: flex;
+    align-items: center;
+    background-color: gainsboro;
+}
+
+.receiver-img {
+    height: 45px;
+    width: 45px;
+    border-radius: 50%;
+    margin-left: 15px;
+    margin-right: 15px;
+}
