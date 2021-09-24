@@ -2,6 +2,7 @@ import React from 'react'
 import firebase from 'firebase' 
 import { auth, db } from '../../firebase'
 import './SignIn.css'
+import hello from '../../images/Hello.svg';
 
 const SignIn: React.FC = () => {
     const signInWithGoogle = async () => {
@@ -24,7 +25,7 @@ const SignIn: React.FC = () => {
     return (
         <div className="sign-in-container">
             <div className="sign-in-content">
-                <div className="image"></div>
+                <img src={hello} className="image" alt="Hello" />
                 <div className="sign-in-box">
                     <h2 className="sign-in-text">Welcome to DoanChat</h2>
                     <button className="sign-in-button" onClick={signInWithGoogle}>Sign in with Google</button>

@@ -17,7 +17,7 @@
 
 .chat-list {
     width: 17%;
-    height: 90vh;
+    height: 92vh;
 }
 
 .send-box {
@@ -48,7 +48,7 @@
 } 
 
 .messages {
-    height: 72vh;
+    height: 74vh;
     background-color: white;
     width: 100%;
     overflow-y: scroll;

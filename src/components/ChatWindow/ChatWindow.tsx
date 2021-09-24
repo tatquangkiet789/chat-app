@@ -27,7 +27,13 @@ const ChatWindow: React.FC = () => {
                 snapShot.docs.forEach(doc => {
                     if((doc.data().senderID === user.uid && doc.data().receiverID === receiverID) || 
                         (doc.data().senderID === receiverID && doc.data().receiverID === user.uid)) {
-                        temp.push({uid: doc.id, text: doc.data().text, senderID: doc.data().senderID, receiverID: doc.data().receiverID}); 
+                        temp.push({ 
+                            uid: doc.id, 
+                            text: doc.data().text, 
+                            senderID: doc.data().senderID, 
+                            receiverID: doc.data().receiverID,
+                            senderPhoto: doc.data().senderPhoto
+                        }); 
                     }
                 }) 
                 setMessages(temp);
@@ -52,10 +58,11 @@ const ChatWindow: React.FC = () => {
                         text: name,
                         senderID: user.uid,
                         receiverID: receiverID,
-                        created: firebase.firestore.FieldValue.serverTimestamp()
+                        created: firebase.firestore.FieldValue.serverTimestamp(),
+                        senderPhoto: user.photoURL
                     });
-                    messageNameRef.current.value = "";
                 }
+                messageNameRef.current.value = "";
                 //Dùng để tự động scroll down tới mesage mới nhất
                 dmmyMesseage.current.scrollIntoView({behavior: 'smooth'});
             }
@@ -90,7 +97,6 @@ const ChatWindow: React.FC = () => {
                     </form>
                 </div>
             </div>
-            {console.log(receiverID)}
         </div>
     )
 }

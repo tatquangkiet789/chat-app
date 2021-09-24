@@ -10,7 +10,8 @@ const Message: React.FC<Props> = ({message}) => {
     const currentUser = useContext<User>(UserContext);
 
     return (
-        <div className={(currentUser.uid === message.senderID) ? "message-container-send" : "message-container"}>
+        <div className={(currentUser.uid === message.senderID) ? "message-send" : "message"}>
+            {(currentUser.uid === message.receiverID) && <img className="sender-image" src={message.senderPhoto} alt="" />}
             <p>{message.text}</p>
         </div>
     );

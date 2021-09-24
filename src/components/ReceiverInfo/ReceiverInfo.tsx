@@ -22,7 +22,8 @@ const ReceiverInfo: React.FC<Props> = ({receiverID}) => {
 
     return(
         <div className="receiver-container">
-            <img className="receiver-img" src={receiver?.photoURL} alt="Receiver" />
+            {/* Check xem phải có receiverID rồi thì mới hiện cái Avatar ra */}
+            {receiverID && <img className="receiver-img" src={receiver?.photoURL} alt="Receiver" />}
             <h3 className="receiver-name">{receiver?.displayName}</h3>
         </div>
     );

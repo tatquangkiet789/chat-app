@@ -10,6 +10,6 @@
     outline: 1px solid white;
 }
 
-.sign-out-button, .toggle-dark-mode {
+.sign-out-button {
     margin-right: 5%;
 }

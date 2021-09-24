@@ -9,5 +9,6 @@ type Message = {
     uid: string,
     text: string,
     senderID: string,
-    receiverID: string
+    receiverID: string,
+    senderPhoto?: string
 }
