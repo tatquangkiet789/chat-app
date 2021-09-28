@@ -3,14 +3,8 @@
     align-items: center;
     max-width: 70%;
     margin-left: 2%;
-    margin-top: 10px;
-}
-
-.sender-image {
-    height: 40px;
-    width: 40px;
-    border-radius: 5vh;
-    margin-right: 10px;
+    margin-top: 5px;
+    margin-bottom: 5px;
 }
 
 .message p {
@@ -18,11 +12,13 @@
     height: fit-content;
     padding: 11px;
     border-radius: 3vh;
+    word-break: break-all;
 }
 
 .message-send {
     max-width: 70%;
-    margin-top: 10px;
+    margin-top: 5px;
+    margin-bottom: 5px;
     align-self: flex-end;
     margin-right: 2%;
 }
@@ -32,4 +28,12 @@
     color: #e6e6e6;
     padding: 11px;
     border-radius: 3vh;
+    word-break: break-all;
+}
+
+.sender-image {
+    height: 40px;
+    width: 40px;
+    border-radius: 5vh;
+    margin-right: 10px;
 }

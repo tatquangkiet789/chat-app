@@ -5,7 +5,7 @@ import "./Navbar.css"
 const Navbar: React.FC = () => {
     return (
         <div className="nav-bar">
-            <div className="sign-out-button">
+            <div className="sign-out-box">
                 <SignOut />
             </div>
         </div>

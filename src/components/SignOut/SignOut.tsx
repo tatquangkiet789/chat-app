@@ -1,5 +1,6 @@
 import React from "react";
 import { auth } from "../../firebase";
+import "./SignOut.css";
 
 const SignOut: React.FC = () => {
     const handleSignOut = () => {
@@ -7,9 +8,9 @@ const SignOut: React.FC = () => {
     }
 
     return (
-        <div>
-            <button onClick={handleSignOut}>SignOut</button>
-        </div>
+        <>
+            <button className="sign-out-button" onClick={handleSignOut}>SignOut</button>
+        </>
     )
 }
 

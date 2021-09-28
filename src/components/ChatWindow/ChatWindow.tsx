@@ -12,7 +12,7 @@ const ChatWindow: React.FC = () => {
     const [messages, setMessages] = useState<Message[]>([]);
     const [receiverID, setReceiverID] = useState<string>("");
     const messageNameRef = useRef() as MutableRefObject<HTMLInputElement>;
-    const dmmyMesseage = useRef() as MutableRefObject<HTMLDivElement>
+    const dummyMesseage = useRef() as MutableRefObject<HTMLDivElement>
     const user = useContext<User>(UserContext); 
 
     //Lấy dữ liệu từ Firestore ở Firebase
@@ -20,7 +20,7 @@ const ChatWindow: React.FC = () => {
         if(db && receiverID !== "") {
             const unsub = db.collection('messages')
             .where('senderID', 'in', [user.uid, receiverID])
-            .orderBy('created').limit(25)
+            .orderBy('created').limit(50)
             .onSnapshot(snapShot => {
                 const temp: Message[] = [];
                 //Nên tối ưu lại khúc trả Messages
@@ -37,6 +37,8 @@ const ChatWindow: React.FC = () => {
                     }
                 }) 
                 setMessages(temp);
+                //Dùng để tự động scroll down tới mesage mới nhất
+                dummyMesseage.current.scrollIntoView({behavior: "smooth"});
             })
             //Dọn dẹp sự kiện onSnapShot
             return () => {
@@ -62,9 +64,7 @@ const ChatWindow: React.FC = () => {
                         senderPhoto: user.photoURL
                     });
                 }
-                messageNameRef.current.value = "";
-                //Dùng để tự động scroll down tới mesage mới nhất
-                dmmyMesseage.current.scrollIntoView({behavior: 'smooth'});
+                messageNameRef.current.value = "";          
             }
         }catch(err) {
             console.log(err);
@@ -88,12 +88,11 @@ const ChatWindow: React.FC = () => {
                         {messages.map(msg => {
                             return <Message key={msg.uid} message={msg}/>
                         })}
-                        <div ref={dmmyMesseage}></div>
+                        <div ref={dummyMesseage}></div>
                     </div>
-                    <div ref={dmmyMesseage}></div>
                     <form className="send-box" onSubmit={handleAddMessage}>
                         <input className="send-bar" type="text" ref={messageNameRef} placeholder="Type your message here....." />
-                        <button className="send-button" type="submit">Send</button>
+                        <button className="send-button" type="submit">🕊️</button>
                     </form>
                 </div>
             </div>

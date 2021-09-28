@@ -10,6 +10,11 @@
     outline: 1px solid white;
 }
 
-.sign-out-button {
+.sign-out-box {
     margin-right: 5%;
+    height: 100%;
+    width: 15vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }

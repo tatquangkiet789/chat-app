@@ -3,3 +3,19 @@
     height: 100%;
     overflow-y: scroll;
 }
+
+.chat-list-container::-webkit-scrollbar {
+    width: 10px;
+}
+
+.chat-list-container::-webkit-scrollbar-track {
+    background: gainsboro;
+}
+  
+.chat-list-container::-webkit-scrollbar-thumb {
+    background: #7f57c6;
+}
+
+.chat-list-container::-webkit-scrollbar-thumb {
+    border-radius: 5px;
+}

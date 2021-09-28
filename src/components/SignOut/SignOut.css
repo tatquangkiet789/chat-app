@@ -1,0 +1,13 @@
+.sign-out-button {
+    width: 13vh;
+    height: 5vh;
+    color: white;
+    background-color: #1c80ed;
+    cursor: pointer;
+    border-radius: 5vh;
+    border: 0;
+}
+
+.sign-out-button:hover {
+    filter: brightness(85%);
+}
