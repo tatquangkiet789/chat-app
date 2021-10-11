@@ -9,11 +9,11 @@
 }
 
 .chat-list-container::-webkit-scrollbar-track {
-    background: gainsboro;
+    background: #7f57c6;
 }
   
 .chat-list-container::-webkit-scrollbar-thumb {
-    background: #7f57c6;
+    background: gainsboro;
 }
 
 .chat-list-container::-webkit-scrollbar-thumb {
