@@ -45,18 +45,18 @@ const ChatWindow: React.FC = () => {
                 unsub();
             }
         }
-    }, [receiverID])
+    }, [receiverID]);
 
     //Thêm message vào Firestore
-    const handleAddMessage = async (e: FormEvent<HTMLFormElement>) => {
+    const handleAddMessage = (e: FormEvent<HTMLFormElement>) => {
         try {
             const name = messageNameRef.current.value;
-            if(name === "")
+            if(name === "" && receiverID === "")
                 return;
             else {
                 e.preventDefault();
                 if(receiverID) {
-                    await db.collection('messages').add({
+                    db.collection('messages').add({
                         text: name,
                         senderID: user.uid,
                         receiverID: receiverID,
@@ -90,6 +90,7 @@ const ChatWindow: React.FC = () => {
                         })}
                         <div ref={dummyMesseage}></div>
                     </div>
+                        
                     <form className="send-box" onSubmit={handleAddMessage}>
                         <input className="send-bar" type="text" ref={messageNameRef} placeholder="Type your message here....." />
                         <button className="send-button" type="submit">🕊️</button>

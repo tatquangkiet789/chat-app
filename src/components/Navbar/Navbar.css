@@ -6,7 +6,7 @@
     left: 5%;
     display: flex;
     align-items: center;
-    justify-content: flex-end;
+    justify-content: space-between;
     outline: 1px solid white;
 }
 
@@ -17,4 +17,11 @@
     display: flex;
     align-items: center;
     justify-content: center;
+}
+
+.title {
+    color: white;
+    margin-left: 3%;
+    font-weight: bold;
+    letter-spacing: 5px;
 }
